@@ -7,17 +7,49 @@
 
 <body>
     <script src="script.js"></script>
-</body>
 
-<ul id="catalog">
-    <li type="button">География</li>
-    <li type="button">История</li>
-    <li type="button">Алгебра</li>
-</ul>
+    <ul id="catalog">
+        <li><button data-id=all>ВСЕ</button></li>
+        <li><button data-id=economy>Экономика</button></li>
+        <li><button data-id=politics>Политика</button></li>
+        <li><button data-id=culture>Культура</button></li>
+    </ul>
+    <div id="output"></div>
+</body>
 
 <script>
     let topic = document.querySelector('#catalog');
-    topic.addEventListener('click', selectTopic);
+    topic.addEventListener('click', showsQuote);
+
+    function showsQuote() {
+        const quote = getQuote();
+        document.getElementById('output').innerHTML = quote;
+    };
+
+    function getQuote() {
+        // todo: тянуть из объектка categories
+        const quotes = [
+            "«Быть нацией по сути самая универсальная легитимная ценность в политической жизни нашего времени» Б. Андерсон",
+            "«Мы должны завоевать народы нашей промышленностью и победить их нашим вкусом».  Кольбе (Франция)"];
+
+        const randomIndex = Math.floor(Math.random() * quotes.length);
+        const randomQuote = quotes[randomIndex];
+        return randomQuote;
+    }
+
+    const categories = {
+        politics: [
+            "«Быть нацией по сути самая универсальная легитимная ценность в политической жизни нашего времени» Б. Андерсон",
+            "«Мы должны завоевать народы нашей промышленностью и победить их нашим вкусом».  Кольбе (Франция)"
+        ],
+        economy: [
+            "«Роль правительства в свободном обществе делать то, что рынок не может делать для себя сам, а именно определять, устанавливать и поддерживать правила игры» М.  Фридман",
+            "Не работодатель выдает зарплату, работодатель только распределяет деньги. Зарплату выдает клиент». Г. Форд"
+        ],
+        culture: [
+            "«Все носят невидимые очки, стекла которых сварены из услышанных или прочитанных слов, идей и мнений. Никто не свободен от очков» Н. Арутюнян"
+        ],
+    }
 
 </script>
 
