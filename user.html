@@ -21,17 +21,13 @@
     let topic = document.querySelector('#catalog');
     topic.addEventListener('click', showsQuote);
 
-    function showsQuote() {
-        const quote = getQuote();
+    function showsQuote(event) {
+        const quote = getQuote(event.target.dataset.id);
         document.getElementById('output').innerHTML = quote;
     };
 
-    function getQuote() {
-        // todo: тянуть из объектка categories
-        const quotes = [
-            "«Быть нацией по сути самая универсальная легитимная ценность в политической жизни нашего времени» Б. Андерсон",
-            "«Мы должны завоевать народы нашей промышленностью и победить их нашим вкусом».  Кольбе (Франция)"];
-
+    function getQuote(propertyName) {
+        const quotes = categories[propertyName];
         const randomIndex = Math.floor(Math.random() * quotes.length);
         const randomQuote = quotes[randomIndex];
         return randomQuote;
