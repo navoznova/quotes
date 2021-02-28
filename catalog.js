@@ -1,5 +1,4 @@
 import QuoteStorage from './Model/quoteStorage.js'
-
 export default class Catalog {
 
     constructor() {
@@ -13,28 +12,35 @@ export default class Catalog {
             <li><button data-id=politics>Политика</button></li>
             <li><button data-id=culture>Культура</button></li>`;
         
-        this.htmlElement.innerHTML = categoriasListHtml;
+        catalogContainer.innerHTML = categoriasListHtml;
+        catalogContainer.addEventListener('click', this.getQuote);
+
         this.htmlElement = catalogContainer;
     }
 
-    getTopic() {
-        let catalog = document.querySelector('#catalog');
-        catalog.addEventListener('click', this.showsQuote);
+    getQuote(event) {
+        const selectedCategory = event.target.dataset.id;
+
+        let quoteStorage = new QuoteStorage();
+        let quotes = quoteStorage.getAllQuotes();
+
+        let quotesOncategories = quotes.map(quote => {quote[selectedCategory]});
+        let quotesText = quotesOncategories.map(quote => {quote.text});
+
+        let randomIndex = this.getRandomIndex(quotesText);
+        const randomQuote = quotesText[randomIndex];
+        
+        this.showQuote(randomQuote);
     }
-
-    showsQuote(event) {
-        const quote = this.getQuote(event.target.dataset.id);
-        document.getElementById('output').innerHTML = quote;
-    };
-
-    getQuote(propertyName) {
-        const quotes = this.categories[propertyName];
-        const randomIndex = Math.floor(Math.random() * quotes.length);
-        const randomQuote = quotes[randomIndex];
-        return randomQuote;
-    }
-
-    //Написать функцию, кторая добавляет в catalogListHtml новый категорию 
     
+    getRandomIndex(quotes) {
+        const index = Math.floor(Math.random() * quotes.length);
+        return index;
+
+    }
+
+    showQuote(quote){
+        document.getElementById('output').innerHTML = quote;
+    }
 }
 
