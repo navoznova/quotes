@@ -1,9 +1,7 @@
-import QuoteStorage from './Model/quoteStorage.js'
 export default class Catalog {
-
-    constructor() {
-        this.quoteStorage = new QuoteStorage();
-        let catalogContainer = ducument.createElement('ul');
+    constructor(quotes) {
+        this.quotes = quotes;
+        let catalogContainer = document.createElement('ul');
         catalogContainer.id = "catalog";
 
         let categoriasListHtml = `
@@ -11,9 +9,9 @@ export default class Catalog {
             <li><button data-id=economy>Экономика</button></li>
             <li><button data-id=politics>Политика</button></li>
             <li><button data-id=culture>Культура</button></li>`;
-        
+
         catalogContainer.innerHTML = categoriasListHtml;
-        catalogContainer.addEventListener('click', this.getQuote);
+        catalogContainer.addEventListener('click', (event) => { this.getQuote(event) });
 
         this.htmlElement = catalogContainer;
     }
@@ -21,25 +19,21 @@ export default class Catalog {
     getQuote(event) {
         const selectedCategory = event.target.dataset.id;
 
-        let quoteStorage = new QuoteStorage();
-        let quotes = quoteStorage.getAllQuotes();
-
-        let quotesOncategories = quotes.map(quote => {quote[selectedCategory]});
-        let quotesText = quotesOncategories.map(quote => {quote.text});
+        let quotesOncategories = this.quotes.filter(quote => quote.category == selectedCategory);
+        let quotesText = quotesOncategories.map(quote => quote.text);
 
         let randomIndex = this.getRandomIndex(quotesText);
         const randomQuote = quotesText[randomIndex];
-        
+
         this.showQuote(randomQuote);
     }
-    
-    getRandomIndex(quotes) {
-        const index = Math.floor(Math.random() * quotes.length);
-        return index;
 
+    getRandomIndex(quotesArr) {
+        const index = Math.floor(Math.random() * quotesArr.length);
+        return index;
     }
 
-    showQuote(quote){
+    showQuote(quote) {
         document.getElementById('output').innerHTML = quote;
     }
 }

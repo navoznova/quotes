@@ -6,8 +6,16 @@
 </head>
 
 <body>
-    <script src="./index.js"></script>
     <div id="output"></div>
+
+    <script type="module">
+        import quotes from './Model/quoteStorage.js'
+        import Catalog from './catalog.js';
+
+        let catalog = new Catalog(quotes);
+        document.body.append(catalog.htmlElement);
+    </script>
+
 </body>
 
 </html>
