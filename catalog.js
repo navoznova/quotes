@@ -4,37 +4,31 @@ export default class Catalog {
         let catalogContainer = document.createElement('ul');
         catalogContainer.id = "catalog";
 
+        // TODO: избавиться от хардкода. Составлять список копок на основе списка всех категорий из QuoteStorage
         let categoriasListHtml = `
-            <li><button data-id=all>ВСЕ</button></li>
-            <li><button data-id=economy>Экономика</button></li>
-            <li><button data-id=politics>Политика</button></li>
-            <li><button data-id=culture>Культура</button></li>`;
+            <li><button data-category=all>ВСЕ</button></li>
+            <li><button data-category=economy>Экономика</button></li>
+            <li><button data-category=politics>Политика</button></li>
+            <li><button data-category=culture>Культура</button></li>`;
 
         catalogContainer.innerHTML = categoriasListHtml;
-        catalogContainer.addEventListener('click', (event) => { this.getQuote(event) });
+        catalogContainer.addEventListener('click', (event) => { this.showQuoteButtonClickHandler(event) });
 
         this.htmlElement = catalogContainer;
     }
 
-    getQuote(event) {
-        const selectedCategory = event.target.dataset.id;
+    showQuoteButtonClickHandler(event) {
+        const category = event.target.dataset.category;
 
-        let quotesOncategories = this.quotes.filter(quote => quote.category == selectedCategory);
-        let quotesText = quotesOncategories.map(quote => quote.text);
+        let quotesByCategories = this.quotes.filter(quote => quote.category === category);
+        let randomIndex = Math.floor(Math.random() * quotesByCategories.length);
+        const randomQuote = quotesByCategories[randomIndex];
 
-        let randomIndex = this.getRandomIndex(quotesText);
-        const randomQuote = quotesText[randomIndex];
-
-        this.showQuote(randomQuote);
-    }
-
-    getRandomIndex(quotesArr) {
-        const index = Math.floor(Math.random() * quotesArr.length);
-        return index;
-    }
-
-    showQuote(quote) {
-        document.getElementById('output').innerHTML = quote;
-    }
+        function getQuoteHtml(quote){
+            return quote.text + ' ' + quote.author;
+        }
+    
+        document.getElementById('output').innerHTML = getQuoteHtml(randomQuote);
+    }    
 }
 
