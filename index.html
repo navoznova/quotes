@@ -9,13 +9,9 @@
     <div id="output"></div>
 
     <script type="module">
-        import QuoteStorage from './Model/quoteStorage.js'
         import Catalog from './catalog.js';
 
-        let quoteStorage = new QuoteStorage();
-        let allQuotes = quoteStorage.getAllQuotes();
-        
-        let catalog = new Catalog(allQuotes);
+        let catalog = new Catalog();
         document.body.append(catalog.htmlElement);
     </script>
 
