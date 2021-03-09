@@ -20,9 +20,24 @@
 		<input type="button" class="save" value="Save" />
 	</form>
 
+	<table class="table table-striped">
+		<thead>
+		  <tr>
+			<th scope="col">Категория</th>
+			<th scope="col">Цитата</th>
+			<th scope="col">Тег</th>
+			<th scope="col">Страна</th>
+			<th scope="col">Год</th>
+			<th scope="col"></th>
+		  </tr>
+		</thead>
+	  </table>
+
 	<script type="module">
 		import QuoteStorage from './Model/quoteStorage.js'
 		import QuoteCart from './Model/quoteCart.js'
+		import Table from './table.js'
+
 
 		let saveButton = document.querySelector('.save');
 		saveButton.addEventListener('click', () => {
@@ -40,8 +55,11 @@
 			function getNodeValue(className){
 				return document.querySelector(className).value;
 			}
-		}
-		);
+		});
+
+		let tBody = new Table();
+		let table = document.querySelector('table');
+		table.appendChild(tBody.tbody);
 	</script>
 
 </body>
