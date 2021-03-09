@@ -19,16 +19,16 @@
 		import QuoteStorage from './Model/quoteStorage.js'
 		import QuoteCart from './Model/quoteCart.js'
 
-		let category = document.querySelector('.js-category').textContent;
-		let text = document.querySelector('.js-text').textContent;
-		let author = document.querySelector('.js-author').textContent;
-		let tag = document.querySelector('.js-tag').textContent;
-
-		let quoteCart = new QuoteCart(category, text, author, tag);
-		let quoteStorage = new QuoteStorage();        
-
         let saveButton = document.querySelector('.save');
-        saveButton.addEventListener('click', () => quoteStorage.saveNewQuote(quoteCart));
+        saveButton.addEventListener('click', () => {
+			let categoty= document.querySelector('.js-category').value;
+			let text = document.querySelector('.js-text').value;
+			let author = document.querySelector('.js-author').value;
+			let tag = document.querySelector('.js-tag').value;
+
+			let quoteCart = new QuoteCart(category, text, author, tag);
+			let quoteStorage = new QuoteStorage();
+			quoteStorage.saveNewQuote(quoteCart)});
 	</script>
 
 </body>
