@@ -16,7 +16,7 @@ export default class Catalog {
                     </div>
                 </div>
             </div>`);
-        categoryHtmls.push('<li><button data-name="All">Все</button></li>')
+        categoryHtmls.push('<button class="btn btn-primary" data-name="All">Все</button>')
         let categoriesHtmlStr = categoryHtmls.join('');
 
         let catalogContainer = document.createElement('div');
