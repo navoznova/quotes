@@ -3,14 +3,19 @@
 
 <head>
 	<meta charset="utf-8" />
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 </head>
 
 <body>
 	<form name="">
 		<input class="js-category" placeholder="Enter categoty"></input>
 		<input class="js-text" placeholder="Enter quote"></input>
-		<input class="js-author" placeholder="Enter author"></input>
 		<input class="js-tag" placeholder="Enter tag"></input>
+		<input class="js-author" placeholder="Enter author"></input>
+		<input class="js-country" placeholder="Enter country"></input>
+		<input class="js-year" placeholder="Enter year"></input>
 
 		<input type="button" class="save" value="Save" />
 	</form>
@@ -19,16 +24,24 @@
 		import QuoteStorage from './Model/quoteStorage.js'
 		import QuoteCart from './Model/quoteCart.js'
 
-        let saveButton = document.querySelector('.save');
-        saveButton.addEventListener('click', () => {
-			let categoty= document.querySelector('.js-category').value;
-			let text = document.querySelector('.js-text').value;
-			let author = document.querySelector('.js-author').value;
-			let tag = document.querySelector('.js-tag').value;
-
-			let quoteCart = new QuoteCart(category, text, author, tag);
+		let saveButton = document.querySelector('.save');
+		saveButton.addEventListener('click', () => {
+			let category = getNodeValue('.js-category');
+			let text = getNodeValue('.js-text');
+			let tag = getNodeValue('.js-tag');
+			let author = getNodeValue('.js-author');
+			let country = getNodeValue('.js-country');
+			let year = getNodeValue('.js-year');
+	
+			let quoteCart = new QuoteCart(category, text, tag, author, country, year);
 			let quoteStorage = new QuoteStorage();
-			quoteStorage.saveNewQuote(quoteCart)});
+			quoteStorage.saveNewQuote(quoteCart);
+
+			function getNodeValue(className){
+				return document.querySelector(className).value;
+			}
+		}
+		);
 	</script>
 
 </body>
