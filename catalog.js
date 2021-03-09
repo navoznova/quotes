@@ -5,12 +5,23 @@ export default class Catalog {
         this.quotes = this.quoteStorage.getAllQuotes();
 
         let categories = this.getCategories();
-        let categoryHtmls = categories.map(category => `<li><button data-name='${category}'>${category}</button></li>`);
+        let categoryHtmls = categories.map(category => 
+            `<div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="/images/img.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                    <h5 class="card-title">${category}</h5>
+                    <p class="card-text">Описание категории.</p>
+                    <button class="btn btn-primary" data-name='${category}'>Получить цитату</button>
+                    </div>
+                </div>
+            </div>`);
         categoryHtmls.push('<li><button data-name="All">Все</button></li>')
         let categoriesHtmlStr = categoryHtmls.join('');
 
-        let catalogContainer = document.createElement('ul');
+        let catalogContainer = document.createElement('div');
         catalogContainer.id = "catalog";
+        catalogContainer.classList.add('row');
         catalogContainer.innerHTML = categoriesHtmlStr;
         catalogContainer.addEventListener('click', (event) => { this.showQuoteButtonClickHandler(event) });
 
@@ -53,7 +64,4 @@ export default class Catalog {
             }
         };
     }*/
-
-    //TODO: добавить возмодность выводить рандомную цитату из всего списка цитат
-    //TODO: сделать карточку цитаты
 }
