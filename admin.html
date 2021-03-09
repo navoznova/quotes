@@ -2,16 +2,35 @@
 <html>
 
 <head>
-  <meta charset="utf-8" />
+	<meta charset="utf-8" />
 </head>
 
 <body>
-  <script src="script.js"></script>
-</body>
+	<form name="">
+		<input class="js-category" placeholder="Enter categoty"></input>
+		<input class="js-text" placeholder="Enter quote"></input>
+		<input class="js-author" placeholder="Enter author"></input>
+		<input class="js-tag" placeholder="Enter tag"></input>
 
-<form name="">
-    <input type="text" name="topic" placeholder="Enter topic"></input>
-    <input type="button" name="save" value="Save" />
-</form>
+		<input type="button" class="save" value="Save" />
+	</form>
+
+	<script type="module">
+		import QuoteStorage from './Model/quoteStorage.js'
+		import QuoteCart from './Model/quoteCart.js'
+
+		let category = document.querySelector('.js-category').textContent;
+		let text = document.querySelector('.js-text').textContent;
+		let author = document.querySelector('.js-author').textContent;
+		let tag = document.querySelector('.js-tag').textContent;
+
+		let quoteCart = new QuoteCart(category, text, author, tag);
+		let quoteStorage = new QuoteStorage();        
+
+        let saveButton = document.querySelector('.save');
+        saveButton.addEventListener('click', () => quoteStorage.saveNewQuote(quoteCart));
+	</script>
+
+</body>
 
 </html>
