@@ -6,26 +6,28 @@ export default class Catalog {
 
         let categories = this.getCategories();
         let categoryHtmls = categories.map(category => 
-            `<div class="col">
-                <div class="card" style="width: 18rem;">
-                    <img src="/images/img.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                    <h5 class="card-title">${category}</h5>
-                    <p class="card-text">Описание категории.</p>
-                    <button class="btn btn-primary" data-name='${category}'>Получить цитату</button>
-                    </div>
-                </div>
-            </div>`);
-        categoryHtmls.push('<button class="btn btn-primary" data-name="All">Все</button>')
+        `<div class="col">
+          <div class="card shadow-sm">
+          <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+            <div class="card-body">
+            <h5 class="card-title">${category}</h5>
+              <p class="card-text">Описание категории</p>
+              <div class="d-flex justify-content-between align-items-center">
+                  <button type="button" class="btn btn-sm btn-outline-secondary" data-name='${category}'>Получить цитату</button>
+              </div>
+            </div>
+          </div>
+        </div>`);
+        categoryHtmls.push('<button class="btn btn-primary my-2" data-name="All">Все</button>')
         let categoriesHtmlStr = categoryHtmls.join('');
 
         let catalogContainer = document.createElement('div');
         catalogContainer.id = "catalog";
-        catalogContainer.classList.add('row');
+        catalogContainer.classList.add('row','row-cols-1','row-cols-sm-2','row-cols-md-3','g-3');
+
         catalogContainer.innerHTML = categoriesHtmlStr;
         catalogContainer.addEventListener('click', (event) => { this.showQuoteButtonClickHandler(event) });
-
-        this.htmlElement = catalogContainer;
+        this.htmlElement = catalogContainer;        
     }
 
     getCategories() {
