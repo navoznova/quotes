@@ -18,7 +18,7 @@ export default class QuoteStorage {
         localStorage['quotes'] = jsonStr;
     }
     deleteQuote(event){
-        console.log(event.target.closest('tr'));
+        let id = event.target.closest('tr').dataset.quoteId;
         let allQuotes = this.getAllQuotes();
         let indexQuoteToDelete = allQuotes.findIndex(quote => quote.id === id);
         allQuotes.splice(indexQuoteToDelete, 1);
