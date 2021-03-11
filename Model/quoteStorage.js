@@ -17,5 +17,12 @@ export default class QuoteStorage {
         let jsonStr = JSON.stringify(quotes);
         localStorage['quotes'] = jsonStr;
     }
+    deleteQuote(event){
+        console.log(event.target.closest('tr'));
+        let allQuotes = this.getAllQuotes();
+        let indexQuoteToDelete = allQuotes.findIndex(quote => quote.id === id);
+        allQuotes.splice(indexQuoteToDelete, 1);
+        localStorage['quotes'] = JSON.stringify(allQuotes);
+    }
 }
 

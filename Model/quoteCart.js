@@ -1,3 +1,4 @@
+import generateGuid from './generate-guid.js';
 export default class QuoteCart {
     constructor(categoryName, quoteText, authorName, tagName, countryName, year){
         this.category = categoryName;
@@ -6,5 +7,6 @@ export default class QuoteCart {
         this.tag = tagName;
         this.country = countryName;
         this.year = year;
+        this.guid = generateGuid();
     }
 }
