@@ -1,4 +1,4 @@
-import QuoteStorage from './Model/quoteStorage.js'
+import QuoteStorage from './model/quoteStorage.js'
 export default class Table {
 
     constructor() {
