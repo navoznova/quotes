@@ -54,8 +54,8 @@
 			let quoteCart = new QuoteCart(category, text, tag, author, country, year);
 			let quoteStorage = new QuoteStorage();
 			quoteStorage.saveNewQuote(quoteCart);
-			tBody.addRow(quoteCart);			
-
+			tBody.addRow(quoteCart);
+			
 			function getNodeValue(className){
 				return document.querySelector(className).value;
 			}

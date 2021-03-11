@@ -1,9 +1,8 @@
 import QuoteStorage from './model/quoteStorage.js'
 export default class Table {
-
     constructor() {
-        let quoteStorage = new QuoteStorage();
-        this.quotes = quoteStorage.getAllQuotes();
+        this.quoteStorage = new QuoteStorage();
+        this.quotes = this.quoteStorage.getAllQuotes();
         this.fieldNames = ['category', 'text', 'tag', 'country', 'year'];
 
         this.tbody = document.createElement('tbody');
@@ -11,10 +10,7 @@ export default class Table {
         this.tbody.innerHTML = trs.join('');
 
         let buttons = this.tbody.querySelectorAll('button');
-        for (let button of buttons) {
-            button.addEventListener('click', (event) => this.deleteRow(event));
-            button.addEventListener('click', (event) => quoteStorage.deleteQuote(event));
-        }
+        buttons.forEach(button => {this.addListener(button)});
     }
 
     getRowHtml(quote) {
@@ -27,8 +23,16 @@ export default class Table {
     addRow(quote) {
         let tr = document.createElement(`tr`);
         tr.setAttribute('data-quote-id', `${quote.id}`);
-        tr.innerHTML = this.getRowHtml(quote);        
+        tr.innerHTML = this.getRowHtml(quote);
+        let button = tr.querySelector('button');
+        this.addListener(button);
+        
         document.querySelector('tbody').appendChild(tr);
+    }
+
+    addListener(button) {
+        button.addEventListener('click', (event) => this.deleteRow(event));
+        button.addEventListener('click', (event) => this.quoteStorage.deleteQuote(event));
     }
 
     deleteRow(event) {
