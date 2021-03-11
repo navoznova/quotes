@@ -7,6 +7,6 @@ export default class QuoteCart {
         this.tag = tagName;
         this.country = countryName;
         this.year = year;
-        this.guid = generateGuid();
+        this.id = generateGuid();
     }
 }

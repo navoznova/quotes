@@ -20,13 +20,14 @@ export default class Table {
     getRowHtml(quote) {
         let tds = this.fieldNames.map(fieldName => `<td>${quote[fieldName]}</td>`);
         tds.push('<td><button>X</button></td>');
-        let tr = `<tr>${tds.join('')}</tr>`;
+        let tr = `<tr data-quote-id = ${quote.id}>${tds.join('')}</tr>`;
         return tr;
     }
 
     addRow(quote) {
-        let tr = document.createElement('tr');
-        tr.innerHTML = this.getRowHtml(quote);
+        let tr = document.createElement(`tr`);
+        tr.setAttribute('data-quote-id', `${quote.id}`);
+        tr.innerHTML = this.getRowHtml(quote);        
         document.querySelector('tbody').appendChild(tr);
     }
 
