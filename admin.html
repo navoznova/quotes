@@ -22,16 +22,16 @@
 
 	<table class="table table-striped">
 		<thead>
-		  <tr>
-			<th scope="col">Категория</th>
-			<th scope="col">Цитата</th>
-			<th scope="col">Тег</th>
-			<th scope="col">Страна</th>
-			<th scope="col">Год</th>
-			<th scope="col"></th>
-		  </tr>
+			<tr>
+				<th scope="col">Категория</th>
+				<th scope="col">Цитата</th>
+				<th scope="col">Тег</th>
+				<th scope="col">Страна</th>
+				<th scope="col">Год</th>
+				<th scope="col"></th>
+			</tr>
 		</thead>
-	  </table>
+	</table>
 
 	<script type="module">
 		import QuoteStorage from './Model/quoteStorage.js'
@@ -50,18 +50,18 @@
 			let author = getNodeValue('.js-author');
 			let country = getNodeValue('.js-country');
 			let year = getNodeValue('.js-year');
-	
+
 			let quoteCart = new QuoteCart(category, text, tag, author, country, year);
 			let quoteStorage = new QuoteStorage();
 			quoteStorage.saveNewQuote(quoteCart);
 			tBody.addRow(quoteCart);
-			
-			function getNodeValue(className){
+
+			function getNodeValue(className) {
 				return document.querySelector(className).value;
 			}
 		});
 
-		
+
 	</script>
 
 </body>

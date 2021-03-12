@@ -1,4 +1,5 @@
 import QuoteStorage from './model/quoteStorage.js'
+
 export default class Table {
     constructor() {
         this.quoteStorage = new QuoteStorage();
@@ -6,24 +7,31 @@ export default class Table {
         this.fieldNames = ['category', 'text', 'tag', 'country', 'year'];
 
         this.tbody = document.createElement('tbody');
-        let trs = this.quotes.map(quote => this.getRowHtml(quote));
-        this.tbody.innerHTML = trs.join('');
+        let trHtmls = this.quotes.map(quote => this.getRowHtml(quote));
+        this.tbody.innerHTML = trHtmls.join('');
 
         let buttons = this.tbody.querySelectorAll('button');
-        buttons.forEach(button => {this.addListener(button)});
+        buttons.forEach(button => {
+            button.addEventListener('click', (event) => {
+                let quoteId = event.target.closest('tr').dataset.quoteId;
+                this.deleteRow(quoteId);
+                this.quoteStorage.deleteQuote(quoteId);
+            });
+        });
     }
 
     getRowHtml(quote) {
-        let tds = this.fieldNames.map(fieldName => `<td>${quote[fieldName]}</td>`);
-        tds.push('<td><button>X</button></td>');
-        let tr = `<tr data-quote-id = ${quote.id}>${tds.join('')}</tr>`;
-        return tr;
+        let tdHtmls = this.fieldNames.map(fieldName => `<td>${quote[fieldName]}</td>`);
+        tdHtmls.push('<td><button>X</button></td>');
+        let trHtml = `<tr data-quote-id='${quote.id}'>${tdHtmls.join('')}</tr>`;
+        return trHtml;
     }
 
     addRow(quote) {
         let tr = document.createElement(`tr`);
-        tr.setAttribute('data-quote-id', `${quote.id}`);
+        tr.setAttribute('data-quote-id', quote.id);
         tr.innerHTML = this.getRowHtml(quote);
+        // todo: навесить класс на тег button использовать его "button.js-removeButton"
         let button = tr.querySelector('button');
         this.addListener(button);
         
@@ -31,12 +39,16 @@ export default class Table {
     }
 
     addListener(button) {
-        button.addEventListener('click', (event) => this.deleteRow(event));
-        button.addEventListener('click', (event) => this.quoteStorage.deleteQuote(event));
+        button.addEventListener('click', (event) => {
+            let id = event.target.closest('tr').dataset.quoteId;
+            this.deleteRow(id);
+            this.quoteStorage.deleteQuote(id);
+        });
     }
 
-    deleteRow(event) {
-        let trToDelete = event.target.closest('tr');
+    deleteRow(quoteId) {
+        let trToDelete = this.tbody.querySelector(`[data-quote-id="${quoteId}"]`);
+        // todo: добавить проверку
         trToDelete.remove();
     }
 }
