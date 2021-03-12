@@ -20,7 +20,12 @@ export default class Table {
     }
 
     getRowHtml(quote) {
-        let tdHtmls = this.fieldNames.map(fieldName => `<td>${quote[fieldName]}</td>`);
+        let tdHtmls = this.fieldNames.map(fieldName => {
+            if (!quote[fieldName]) {
+                quote[fieldName] = '—';
+            }
+            return `<td>${quote[fieldName]}</td>`
+        });
         tdHtmls.push('<td><button class = "js-removeButton">X</button></td>');
         let trHtml = `<tr data-quote-id='${quote.id}'>${tdHtmls.join('')}</tr>`;
         return trHtml;
@@ -29,10 +34,10 @@ export default class Table {
     addRow(quote) {
         let tr = document.createElement(`tr`);
         tr.setAttribute('data-quote-id', quote.id);
-        tr.innerHTML = this.getRowHtml(quote);        
+        tr.innerHTML = this.getRowHtml(quote);
         let button = tr.querySelector('.js-removeButton');
         this.addListener(button);
-        
+
         document.querySelector('tbody').appendChild(tr);
     }
 
