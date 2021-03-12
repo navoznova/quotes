@@ -1,5 +1,4 @@
 import QuoteStorage from './model/quoteStorage.js'
-
 export default class Table {
     constructor() {
         this.quoteStorage = new QuoteStorage();
@@ -22,7 +21,7 @@ export default class Table {
 
     getRowHtml(quote) {
         let tdHtmls = this.fieldNames.map(fieldName => `<td>${quote[fieldName]}</td>`);
-        tdHtmls.push('<td><button>X</button></td>');
+        tdHtmls.push('<td><button class = "js-removeButton">X</button></td>');
         let trHtml = `<tr data-quote-id='${quote.id}'>${tdHtmls.join('')}</tr>`;
         return trHtml;
     }
@@ -30,9 +29,8 @@ export default class Table {
     addRow(quote) {
         let tr = document.createElement(`tr`);
         tr.setAttribute('data-quote-id', quote.id);
-        tr.innerHTML = this.getRowHtml(quote);
-        // todo: навесить класс на тег button использовать его "button.js-removeButton"
-        let button = tr.querySelector('button');
+        tr.innerHTML = this.getRowHtml(quote);        
+        let button = tr.querySelector('.js-removeButton');
         this.addListener(button);
         
         document.querySelector('tbody').appendChild(tr);
@@ -47,8 +45,10 @@ export default class Table {
     }
 
     deleteRow(quoteId) {
+        if (!quoteId) {
+            throw new Error('Не указан id');
+        }
         let trToDelete = this.tbody.querySelector(`[data-quote-id="${quoteId}"]`);
-        // todo: добавить проверку
         trToDelete.remove();
     }
 }

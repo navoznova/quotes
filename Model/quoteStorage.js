@@ -1,26 +1,29 @@
 import quotes from './defaultQuotes.js';
 export default class QuoteStorage {
     getAllQuotes() {
-        if(!localStorage['quotes']) {
-            console.log('Справочник пуст, добавляем цитаты по-умочанию')
+        if (!localStorage['quotes']) {
             localStorage.quotes = JSON.stringify(quotes);
         }
 
         let jsonStr = localStorage['quotes'];
         let jsonParsed = JSON.parse(jsonStr);
 
-        if(jsonParsed.length == 0) {
+        //Как обработать ошибку, если массив пустой? Потом кнопка save не работает 
+        if (jsonParsed.length == 0) {
             throw new Error('В вашем банке цитат нет ниодной цитаты. Добавьте цитаты');
+        } else {
+            return jsonParsed;
         }
-        return jsonParsed;
     }
 
     saveNewQuote(quote) {
         if (!quote) {
-            throw new Error('Incorrect data');
+            throw new Error('Нет цитаты');
         }
 
-        // todo: добавить проверки на наличие обязательных полей
+        if (!quote.category || !quote.text) {
+            throw new Error('Заполните обязательные поля');
+        }
 
         let quotes = this.getAllQuotes();
         quotes.push(quote);
