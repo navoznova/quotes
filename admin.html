@@ -4,35 +4,66 @@
 <head>
 	<meta charset="utf-8" />
 
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-		integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+	<link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+		.bd-placeholder-img {
+			font-size: 1.125rem;
+			text-anchor: middle;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			user-select: none;
+		}
+
+		@media (min-width: 768px) {
+			.bd-placeholder-img-lg {
+				font-size: 3.5rem;
+			}
+		}
+	</style>
 </head>
 
 <body>
-	<form name="">
-		<input class="js-category" placeholder="Enter categoty"></input>
-		<input class="js-text" placeholder="Enter quote"></input>
-		<input class="js-tag" placeholder="Enter tag"></input>
-		<input class="js-author" placeholder="Enter author"></input>
-		<input class="js-country" placeholder="Enter country"></input>
-		<input class="js-year" placeholder="Enter year"></input>
+	<div class="container">
+		<main>
+			<div class="py-5 text-center">
+				<h2>Мастер-интерпретатор</h2>
+				<p class="lead">Страница для управления хранилищем цитат (создание, удаление)</p>
+			</div>
+			<form name="">
+				<label for="firstName" class="form-label">First name</label>
+				<input type="text" class="js-category form-control" placeholder="Enter categoty"></input>
 
-		<input type="button" class="save" value="Save" />
-	</form>
+				<label for="firstName" class="form-label">First name</label>
+				<input type="text" class="js-text form-control" placeholder="Enter quote"></input>
 
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th scope="col">Категория</th>
-				<th scope="col">Цитата</th>
-				<th scope="col">Тег</th>
-				<th scope="col">Страна</th>
-				<th scope="col">Год</th>
-				<th scope="col"></th>
-			</tr>
-		</thead>
-	</table>
+				<label for="firstName" class="form-label">First name</label>
+				<input type="text" class="js-tag form-control" placeholder="Enter tag"></input>
 
+				<label for="firstName" class="form-label">First name</label>
+				<input type="text" class="js-author form-control" placeholder="Enter author"></input>
+
+				<label for="firstName" class="form-label">First name</label>
+				<input type="text" class="js-country form-control" placeholder="Enter country"></input>
+
+				<label for="firstName" class="form-label">First name</label>
+				<input type="text" class="js-year form-control" placeholder="Enter year"></input>
+
+				<input type="button" class="save btn btn-primary btn-lg btn-block" value="Save" />
+			</form>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th scope="col">Категория</th>
+						<th scope="col">Цитата</th>
+						<th scope="col">Тег</th>
+						<th scope="col">Страна</th>
+						<th scope="col">Год</th>
+						<th scope="col"></th>
+					</tr>
+				</thead>
+			</table>
+		</main>
+	</div>
 	<script type="module">
 		import QuoteStorage from './model/quoteStorage.js'
 		import QuoteCart from './model/quoteCart.js'
@@ -62,7 +93,6 @@
 		});
 
 	</script>
-
 </body>
 
 </html>
