@@ -1,4 +1,4 @@
-import generateGuid from './generate-guid.js';
+import generateGuid from './generateGuid.js';
 
 export default class QuoteCart {
     constructor(categoryName, quoteText, authorName, tagName, countryName, year) {
