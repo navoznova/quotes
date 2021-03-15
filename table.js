@@ -26,7 +26,7 @@ export default class Table {
             }
             return `<td>${quote[fieldName]}</td>`
         });
-        tdHtmls.push('<td><button class = "js-removeButton">X</button></td>');
+        tdHtmls.push('<td><button class = "js-removeButton btn btn-outline-danger btn-sm">X</button></td>');
         let trHtml = `<tr data-quote-id='${quote.id}'>${tdHtmls.join('')}</tr>`;
         return trHtml;
     }

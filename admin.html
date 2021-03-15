@@ -23,32 +23,45 @@
 </head>
 
 <body>
+	<header class="navbar bg-dark shadow-sm">
+		<div class="container">
+			<a class="nav-link active text-white" href="index.html">Home</a>
+		</div>
+	</header>
 	<div class="container">
 		<main>
 			<div class="py-5 text-center">
 				<h2>Мастер-интерпретатор</h2>
 				<p class="lead">Страница для управления хранилищем цитат (создание, удаление)</p>
 			</div>
-			<form name="">
-				<label for="firstName" class="form-label">First name</label>
-				<input type="text" class="js-category form-control" placeholder="Enter categoty"></input>
-
-				<label for="firstName" class="form-label">First name</label>
+			<form>
+				<div class="row">
+					<div class="col">
+						<label class="form-label">Category</label>
+						<input type="text" class="js-category form-control" placeholder="Enter category"></input>
+					</div>
+					<div class="col">
+						<label class="form-label">Tag</label>
+						<input type="text" class="js-tag form-control" placeholder="Enter tag"></input>
+					</div>
+				</div>
+				<label class="form-label">Quote</label>
 				<input type="text" class="js-text form-control" placeholder="Enter quote"></input>
-
-				<label for="firstName" class="form-label">First name</label>
-				<input type="text" class="js-tag form-control" placeholder="Enter tag"></input>
-
-				<label for="firstName" class="form-label">First name</label>
-				<input type="text" class="js-author form-control" placeholder="Enter author"></input>
-
-				<label for="firstName" class="form-label">First name</label>
-				<input type="text" class="js-country form-control" placeholder="Enter country"></input>
-
-				<label for="firstName" class="form-label">First name</label>
-				<input type="text" class="js-year form-control" placeholder="Enter year"></input>
-
-				<input type="button" class="save btn btn-primary btn-lg btn-block" value="Save" />
+				<div class="row">
+					<div class="col">
+						<label class="form-label">Author</label>
+						<input type="text" class="js-author form-control" placeholder="Enter author"></input>
+					</div>
+					<div class="col">
+						<label class="form-label">Country</label>
+						<input type="text" class="js-country form-control" placeholder="Enter country"></input>
+					</div>
+					<div class="col">
+						<label class="form-label">Year</label>
+						<input type="text" class="js-year form-control" placeholder="Enter year"></input>
+					</div>
+				</div>
+				<button type="button" class="save btn btn-success" value="Save">Save</button>
 			</form>
 			<table class="table table-striped">
 				<thead>
