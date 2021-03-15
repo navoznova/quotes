@@ -1,4 +1,4 @@
-import QuoteStorage from './model/quoteStorage.js'
+import QuoteStorage from './quoteStorage.js'
 export default class Catalog {
     constructor() {
         this.quoteStorage = new QuoteStorage();
