@@ -14,6 +14,11 @@
 			user-select: none;
 		}
 
+		.btn {
+			margin-top: 20px;
+			margin-bottom: 20px;
+		}
+
 		@media (min-width: 768px) {
 			.bd-placeholder-img-lg {
 				font-size: 3.5rem;
@@ -42,7 +47,7 @@
 					</div>
 					<div class="col">
 						<label class="form-label">Tag</label>
-						<input type="text" class="js-tag form-control" placeholder="Enter tag"></input>
+						<input type="text" class="js-tag form-control" placeholder="#"></input>
 					</div>
 				</div>
 				<label class="form-label">Quote</label>
@@ -78,6 +83,7 @@
 		</main>
 	</div>
 	<script type="module">
+		'use strict';
 		import QuoteStorage from './model/quoteStorage.js'
 		import QuoteCart from './model/quoteCart.js'
 		import Table from './model/table.js'
@@ -87,7 +93,14 @@
 		table.appendChild(tBody.tbody);
 
 		let saveButton = document.querySelector('.save');
-		saveButton.addEventListener('click', () => {
+		saveButton.addEventListener('click', () => { createNewQuote(); });
+		/*document.addEventListener('keydown', (event) => {
+			if (event.keyCode === 13) {
+				createNewQuote()
+			}
+		});*/
+
+		function createNewQuote() {
 			let category = getNodeValue('.js-category');
 			let text = getNodeValue('.js-text');
 			let tag = getNodeValue('.js-tag');
@@ -100,11 +113,12 @@
 			quoteStorage.saveNewQuote(quoteCart);
 			tBody.addRow(quoteCart);
 
+			document.querySelectorAll('input').forEach(item => item.value = "");
+
 			function getNodeValue(className) {
 				return document.querySelector(className).value;
 			}
-		});
-
+		}
 	</script>
 </body>
 
