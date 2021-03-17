@@ -28,8 +28,15 @@ export default class Catalog {
         catalogContainer.classList.add('row', 'row-cols-1', 'row-cols-sm-2', 'row-cols-md-3', 'g-3');
 
         catalogContainer.innerHTML = categoriesHtmlStr;
-        catalogContainer.addEventListener('click', (event) => { this.showQuoteButtonClickHandler(event) });
+
+        let getQuotesButtons = catalogContainer.querySelectorAll('button');
+        getQuotesButtons.forEach(button => {
+            button.addEventListener('click', (event) => {
+                this.showQuoteButtonClickHandler(event)
+            });
+        });
         this.htmlElement = catalogContainer;
+        this.getUniqueRandomIndex = {};
     }
 
     getCategories() {
@@ -39,12 +46,16 @@ export default class Catalog {
 
     showQuoteButtonClickHandler(event) {
         let quotesByCategories = this.quotes;
-
-        if (event.target.dataset.name !== "All") {
-            quotesByCategories = this.quotes.filter(quote => quote.category === event.target.dataset.name);
+        const category = event.target.dataset.name;
+        if (category !== "All") {
+            quotesByCategories = this.quotes.filter(quote => quote.category === category);
         }
-        let randomIndex = Math.floor(Math.random() * quotesByCategories.length);
-        const randomQuote = quotesByCategories[randomIndex];
+
+        if (this.getUniqueRandomIndex[category] === undefined) {
+            this.getUniqueRandomIndex[category] = this.getRandomNum(quotesByCategories.length);
+        }
+
+        const randomQuote = quotesByCategories[this.getUniqueRandomIndex[category]()];
 
         function getQuoteHtml(quote) {
             return `${quote.text} ${quote.author}`;
@@ -53,19 +64,16 @@ export default class Catalog {
         document.getElementById('output').innerHTML = getQuoteHtml(randomQuote);
     }
 
-    addQuote(quote) {
-        this.quoteStorage.addQuote(quote);
-    }
+    getRandomNum(maxValue) {
+        let previousRandomIndex = null;
+        return function () {
+            let randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * maxValue);
+            } while (previousRandomIndex === randomIndex);
 
-    //TODO: избавиться от повторений при многократном вызове рандома. Ниже пример решения
-    /*random = {
-            randNumOld: 0,
-            getRandomInt: function (min, max) {
-                var randNum = Math.floor(Math.random() * (max - min + 1)) + min;
-                if (randNum == random.randNumOld) return random.getRandomInt(min, max);
-                random.randNumOld = randNum;
-                return randNum;
-            }
-        };
-    }*/
+            previousRandomIndex = randomIndex;
+            return randomIndex;
+        }
+    }
 }
