@@ -65,6 +65,12 @@ export default class Catalog {
     }
 
     getRandomNum(maxValue) {
+        if (maxValue === 1) {
+            return function () {
+                return 0;
+            }
+        }
+
         let previousRandomIndex = null;
         return function () {
             let randomIndex;
