@@ -17,12 +17,17 @@ export default class QuoteStorage {
     }
 
     saveNewQuote(quote) {
+        let form = document.querySelector('form');
+        
         if (!quote) {
             throw new Error('Нет цитаты');
         }
 
-        if (!quote.category || !quote.text) {
+        if (!quote.category || !quote.text) {  
+            form.classList.add('was-validated');
             throw new Error('Заполните обязательные поля');
+        } else {
+            form.classList.remove('was-validated');
         }
 
         let quotes = this.getAllQuotes();
