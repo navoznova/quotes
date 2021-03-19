@@ -24,6 +24,7 @@
 <body>
     <header class="navbar bg-dark shadow-sm ">
         <div class="container">
+            <a class="nav-link active text-white" href="index.html">Мастер-интерпретатор</a>
             <a class="nav-link active text-white" href="admin.html">Упраление хранилищем цитат</a>
         </div>
     </header>
@@ -33,15 +34,12 @@
                 <div class="col-lg-6 col-md-8 mx-auto">
                     <h1 class="fw-light">Мастер-интерпретатор</h1>
                     <p class="lead text-muted">Банк высказываний на разные обществоведческие темы</p>
-                    <div class="jumbotron p-3 p-md-5 text-white rounded bg-secondary" id="output"></div>
-                    <p>
-                        <a href="#" class="btn btn-primary my-2">Скопировать цитату</a>
-                    </p>
+                    <div class="jumbotron p-3 p-md-5 text-white rounded bg-secondary" id="output"></div>                    
                 </div>
             </div>
         </section>
         <div class="album py-5 bg-light">
-            <div class="container quote-inner">
+            <div class="container js-quote-inner">
             </div>
         </div>
     </main>
@@ -50,7 +48,7 @@
         import Catalog from './model/catalog.js';
 
         let catalog = new Catalog();
-        document.querySelector('.quote-inner').append(catalog.htmlElement);       
+        document.querySelector('.js-quote-inner').append(catalog.htmlElement);
     </script>
 </body>
 
