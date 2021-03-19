@@ -13,7 +13,7 @@ export default class Table {
     }
 
     getRowHtml(quote) {
-        let fieldNames = ['category', 'text', 'tag', 'country', 'year'];
+        let fieldNames = ['category', 'tag', 'text', 'author', 'tag', 'country', 'year'];
         let tdHtmls = fieldNames.map(fieldName => {
             if (!quote[fieldName]) {
                 quote[fieldName] = '—';
